@@ -1,4 +1,4 @@
-package com.latte.admin.domain.member;
+package com.latte.admin.domain.customer;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Member {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,18 +31,16 @@ public class Member {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String nickname;
 
     // 사진 mypage에서 넣을 수 있도록!
     @Column(nullable = true)
     private String upicture;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
 
     @Builder
-    public Member(String id, String pass, String name, String phone, String email, String nickname, String upicture, Role role) {
+    public Customer(String id, String pass, String name, String phone, String email, String nickname, String upicture, Role role) {
         this.id = id;
         this.pass = pass;
         this.name = name;
@@ -50,7 +48,6 @@ public class Member {
         this.email = email;
         this.nickname = nickname;
         this.upicture = upicture;
-        this.role = role;
     }
 
     public void update(String pass, String phone, String nickname, String upicture) {
@@ -58,10 +55,6 @@ public class Member {
         this.phone = phone;
         this.nickname = nickname;
         this.upicture = upicture;
-    }
-
-    public String getRoleKey(){
-        return this.role.getKey();
     }
 
 }

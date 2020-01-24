@@ -4,6 +4,7 @@ import com.latte.admin.service.GuestService;
 import com.latte.admin.web.dto.guest.GuestSaveRequestDto;
 import com.latte.admin.web.dto.guest.GuestUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -14,29 +15,48 @@ import java.util.Map;
 public class GuestController {
     private final GuestService guestService;
 
-    // 저장 -> 여러개 한번에 보기 MemberListResponseDto만들어서 이용하기
 
-    // 저장 -> 사장별, 손님별로 보기
-    @PostMapping("/api/savemember/{role}")
-    public Map saveMember(@RequestBody GuestSaveRequestDto guestSaveRequestDto, @PathVariable int role) {
-        Map<String,String> map=new HashMap<>();
-        if (guestService.save(role, guestSaveRequestDto) != 0) map.put("result", "success");
-        else map.put("result", "fail");
+    // 회원 가입
+    @PostMapping("/latte/guest/signup")
+    public void signUp(@RequestBody GuestSaveRequestDto guestSaveRequestDto) {
+        guestService.signUp(guestSaveRequestDto);
+    }
+
+    // 아이디 중복 확인
+    @PostMapping("/latte/guest/checkid/{gid}")
+    public void checkId(@PathVariable String gid) {
+        guestService.checkId(gid);
+    }
+
+    // 아이디 찾기
+    @PostMapping("/latte/guest/findid/{gname}/{gemail}")
+    public Map findId(@PathVariable String gname, @PathVariable String gemail) {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", guestService.findId(gname,gemail));
         return map;
     }
 
-    // 업데이트  -> mypage에서 pass, nickname, phone 변경 가능
-    @PutMapping("/api/v1/member/{uid}")
-    public Long update(@PathVariable Long uid, @RequestBody GuestUpdateRequestDto customerUpdateRequestDto) {
-        return guestService.update(uid, customerUpdateRequestDto);
+    // 비밀번호 찾기
+    @PostMapping("/latte/guest/findpass/{gid}/{gemail}")
+    public Map findPass(@PathVariable String gid, @PathVariable String gemail) {
+        Map<String, String> map = new HashMap<>();
+        map.put("email", guestService.findPass(gid, gemail));
+        return map;
     }
 
-    // insert -> 사장에 cafename, cafeloc 넣어보기
+    // 회원 정보 수정 -> mypage에서 pass, nickname, phone 변경 가능
+    @PutMapping("/latte/guest/update/{gid}")
+    public Map update(@PathVariable String gid, @RequestBody GuestUpdateRequestDto guestUpdateRequestDto) {
+        Map<String,String> map = new HashMap<>();
+        map.put("id",guestService.update(gid, guestUpdateRequestDto));
+
+        return map;
+    }
 
     // 삭제
-    @DeleteMapping("/api/v1/member/{uid}")
-    public Long delete(@PathVariable Long uid) {
-        guestService.delete(uid);
-        return uid;
+    @DeleteMapping("/latte/guest/delete/{gid}")
+    public void delete(@PathVariable String gid) {
+        // 세션 해제 추가~!~!~
+        guestService.delete(gid);
     }
 }

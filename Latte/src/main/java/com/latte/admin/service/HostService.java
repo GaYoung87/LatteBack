@@ -2,8 +2,9 @@ package com.latte.admin.service;
 
 import com.latte.admin.domain.host.Host;
 import com.latte.admin.domain.host.HostRepository;
-import com.latte.admin.web.dto.HostSaveRequestDto;
-import com.latte.admin.web.dto.HostUpdateRequestDto;
+import com.latte.admin.web.dto.host.HostResponseDto;
+import com.latte.admin.web.dto.host.HostSaveRequestDto;
+import com.latte.admin.web.dto.host.HostUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

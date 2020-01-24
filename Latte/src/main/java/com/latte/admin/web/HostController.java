@@ -2,13 +2,11 @@ package com.latte.admin.web;
 
 import com.latte.admin.domain.host.Host;
 import com.latte.admin.service.HostService;
-import com.latte.admin.web.dto.HostSaveRequestDto;
+import com.latte.admin.web.dto.host.HostSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor

@@ -15,7 +15,6 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long uid;
 
-//    @Id  // entity의 pk는 Long 타입의 auto_increment를 추천
     @Column(nullable = false)
     private String id;
 
@@ -33,31 +32,19 @@ public class Member {
 
     private String nickname;
 
-    // 사진 mypage에서 넣을 수 있도록!
-    @Column(nullable = true)
-    private String upicture;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
     @Builder
-    public Member(String id, String pass, String name, String phone, String email, String nickname, String upicture, Role role) {
+    public Member(String id, String pass, String name, String phone, String email, String nickname, Role role) {
         this.id = id;
         this.pass = pass;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.nickname = nickname;
-        this.upicture = upicture;
         this.role = role;
-    }
-
-    public void update(String pass, String phone, String nickname, String upicture) {
-        this.pass = pass;
-        this.phone = phone;
-        this.nickname = nickname;
-        this.upicture = upicture;
     }
 
     public String getRoleKey(){

@@ -14,6 +14,7 @@ public class GuestService {
     private final GuestRepository guestRepository;
 
     // 회원 가입
+    // 완료하면 알아서 login페이지로 보내기!
     @Transactional
     public void signUp(GuestSaveRequestDto guestSaveRequestDto) {
         // insert 전에 테이블을 검색해서 중복된 이메일이 있는지 확인한다.

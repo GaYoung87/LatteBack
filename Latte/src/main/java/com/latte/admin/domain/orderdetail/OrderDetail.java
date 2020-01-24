@@ -1,5 +1,6 @@
 package com.latte.admin.domain.orderdetail;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,7 @@ public class OrderDetail {
     @Column(nullable = false)
     private Long mmid;
 
+    @Builder
     public OrderDetail(Long ooid,Long mmid) {
         this.ooid=ooid;
         this.mmid=mmid;

@@ -1,5 +1,6 @@
 package com.latte.admin.domain.order;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,7 @@ public class Order {
     @Column(nullable = false)
     private Long ggid;
 
+    @Builder
     public Order(Long ccid,Long ggid) {
         this.ccid=ccid;
         this.ggid=ggid;

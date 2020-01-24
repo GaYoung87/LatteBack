@@ -1,5 +1,6 @@
 package com.latte.admin.domain.host;
 
+import com.latte.admin.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Host {
+public class Host extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,10 +79,13 @@ public class Host {
         this.cstatus = cstatus;
     }
 
-    public void update(String hpass,String hphone,String hnickname,String cphone,String cpic,String copen,String cclose,String cdesc,String cstatus) {
+    public void HostUpdate(String hpass,String hphone,String hnickname) {
         this.hpass = hpass;
         this.hphone = hphone;
         this.hnickname = hnickname;
+    }
+
+    public void CafeUpdate(String cphone,String cpic,String copen,String cclose,String cdesc,String cstatus) {
         this.cphone = cphone;
         this.cpic = cpic;
         this.copen = copen;

@@ -19,11 +19,13 @@ public class HostSaveRequestDto {
     private String cphone;
     private String cpic;
     private String copen;
+    private String cclose;
+    private String cdesc;
     private String cstatus;
 
     @Builder
     public HostSaveRequestDto(String hid,String hpass,String hname,String hphone,String hemail,String hnickname,
-                String cname,String cloc,String cphone,String cpic,String copen,String cstatus) {
+                String cname,String cloc,String cphone,String cpic,String copen,String cclose,String cdesc,String cstatus) {
         this.hid = hid;
         this.hpass = hpass;
         this.hname = hname;
@@ -35,6 +37,8 @@ public class HostSaveRequestDto {
         this.cphone = cphone;
         this.cpic = cpic;
         this.copen = copen;
+        this.cclose=cclose;
+        this.cdesc=cdesc;
         this.cstatus = cstatus;
     }
 
@@ -51,6 +55,8 @@ public class HostSaveRequestDto {
                 .cphone(cphone)
                 .cpic(cpic)
                 .copen(copen)
+                .cclose(cclose)
+                .cdesc(cdesc)
                 .cstatus(cstatus)
                 .build();
     }

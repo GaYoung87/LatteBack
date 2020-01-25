@@ -66,12 +66,12 @@ public class GuestService {
 
     // 회원 정보 수정
     @Transactional
-    public String update(String gid, GuestUpdateRequestDto customerUpdateRequestDto) {
+    public String update(String gid, GuestUpdateRequestDto guestUpdateRequestDto) {
         Guest guest= guestRepository.findByGid(gid).orElseThrow(()
-                -> new IllegalArgumentException("해당 사용자가 없습니다. id="+gid));
+                -> new IllegalArgumentException("해당 사용자가 없습니다."));
 
-        guest.update(customerUpdateRequestDto.getGpass(), customerUpdateRequestDto.getGphone(),
-                customerUpdateRequestDto.getGnickname());
+        guest.update(guestUpdateRequestDto.getGpass(), guestUpdateRequestDto.getGphone(),
+                guestUpdateRequestDto.getGnickname());
 
         return gid;
     }
@@ -80,7 +80,7 @@ public class GuestService {
     @Transactional
     public void delete(String gid){
         Guest guest= guestRepository.findByGid(gid)
-                .orElseThrow(()-> new IllegalArgumentException("해당 사용자가 없습니다. id="+gid));
+                .orElseThrow(()-> new IllegalArgumentException("해당 사용자가 없습니다."));
 
         guestRepository.delete(guest);
     }

@@ -1,4 +1,4 @@
-package com.latteback.admin.domain.config.auth.dto;
+package com.latte.admin.domain.config.auth.dto;
 
 import com.latteback.admin.domain.user.Role;
 import com.latteback.admin.domain.user.User;

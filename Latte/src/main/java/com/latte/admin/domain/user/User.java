@@ -34,6 +34,9 @@ public class User {
         @Column(nullable = false)
         private String unickname;
 
+        @Column(nullable = true)
+        private String upicture;
+
         @Enumerated(EnumType.STRING)
         @Column(nullable = false)
         private Role role;
@@ -42,21 +45,26 @@ public class User {
     /* 프사!!!!!!!!!!!!!!!! */
 
     @Builder
-    public User(String uid, String upass, String uname, String uphone, String uemail, String unickname, Role role) {
+    public User(String uid, String upass, String uname, String uphone, String uemail, String unickname, String upicture, Role role) {
         this.uid = uid;
         this.upass = upass;
         this.uname = uname;
         this.uphone = uphone;
         this.uemail = uemail;
         this.unickname = unickname;
+        this.upicture = upicture;
         this.role = role;
     }
 
     // 수정할
-    public void update(String upass, String uphone, String unickname) {
+    public void update(String upass, String uphone, String unickname, String upicture) {
         this.upass = upass;
         this.uphone = uphone;
         this.unickname = unickname;
+        this.upicture = upicture;
     }
 
+    public String getRoleKey(){
+        return this.role.getKey();
+    }
 }

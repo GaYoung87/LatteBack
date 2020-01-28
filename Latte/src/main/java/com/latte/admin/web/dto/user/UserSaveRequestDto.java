@@ -20,16 +20,18 @@ public class UserSaveRequestDto {
     private String uphone;
     private String uemail;
     private String unickname;
+    private String upicture;
     private Role role;
 
     @Builder
-    public UserSaveRequestDto(String uid, String upass, String uname, String uphone, String uemail, String unickname, Role role) {
+    public UserSaveRequestDto(String uid, String upass, String uname, String uphone, String uemail, String unickname, String upicture, Role role) {
         this.uid = uid;
         this.upass = upass;
         this.uname = uname;
         this.uphone = uphone;
         this.uemail = uemail;
         this.unickname = unickname;
+        this.upicture = upicture;
         this.role = role;
     }
 
@@ -41,6 +43,7 @@ public class UserSaveRequestDto {
                 .uphone(uphone)
                 .uemail(uemail)
                 .unickname(unickname)
+                .upicture(upicture)
                 .role(role)
                 .build();
     }

@@ -3,6 +3,7 @@ package com.latte.admin.domain.menu;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.latte.admin.domain.cafe.Cafe;
 import com.latte.admin.domain.cafe.CafeRepository;
+import com.latte.admin.domain.orderdetail.OrderDetail;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,10 +20,13 @@ public class Menu {
     private Long mmid;
 
     // fk -> 1:N = cafe:menu
-    // 카페 정보 받아옴
     @ManyToOne(optional = false)
     @JsonBackReference
-    private Cafe cafe;
+    private Cafe cafemenu;
+
+    // fk -> 1:1 = orderDetail:menu
+    @OneToOne(mappedBy = "menu")
+    private OrderDetail orderDetail;
 
     @Column(nullable = false)
     private String mname;
@@ -34,8 +38,9 @@ public class Menu {
     private String mpic;
 
     @Builder
-    public Menu(Cafe cafe, String mname,String mprice,String mpic) {
-       this.cafe=cafe;
+    public Menu(Cafe cafemenu,OrderDetail orderDetail,String mname,String mprice,String mpic) {
+        this.cafemenu=cafemenu;
+        this.orderDetail=orderDetail;
         this.mname=mname;
         this.mprice=mprice;
         this.mpic=mpic;

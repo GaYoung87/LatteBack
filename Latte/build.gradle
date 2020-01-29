@@ -42,12 +42,12 @@ dependencies {
     compile 'io.springfox:springfox-swagger-ui:2.6.1'
     //spring-security-oauth2-client와 spring-security-oauth2-jose를 기본으로 관리해줍니다.
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     //소셜 로그인 등 클라이언트 입장에서 소셜 기능 구현 시 필요한 의존성입니다.
-    compile('org.springframework.security:spring-security-oauth2-jose')
-    compile('org.springframework.boot:spring-boot-starter-security')
-    compile('org.springframework.boot:spring-boot-starter-oauth2-client') //스프링 시큐리티 관련 의존성 주입
+//    compile('org.springframework.security:spring-security-oauth2-jose')
+//    compile('org.springframework.boot:spring-boot-starter-security')
+//    compile('org.springframework.boot:spring-boot-starter-oauth2-client') //스프링 시큐리티 관련 의존성 주입
 
 //    // 이메일 인증시 사용
 //    compile("org.springframework.boot:spring-boot-starter-mail")

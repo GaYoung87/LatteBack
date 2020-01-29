@@ -1,8 +1,11 @@
 package com.latte.admin.domain.cafe;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.latte.admin.domain.BaseTimeEntity;
 import com.latte.admin.domain.menu.Menu;
+import com.latte.admin.domain.order.Order;
+import com.latte.admin.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,14 +23,6 @@ public class Cafe extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ccid;
 
-    @Column(nullable = true)
-    private String uid;  // fk
-
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "cafe")
-    @JsonManagedReference
-    private Collection<Menu> menus=new ArrayList<>();
-
-    // 사장기반로그인 -> 카페입력하기페이지가서 아래것들 입력하기
     @Column(nullable = false)
     private String cname;
 
@@ -52,6 +47,20 @@ public class Cafe extends BaseTimeEntity {
     @Column(nullable = false)
     private String cstatus;  // -1:승인X, 0:대기, 1:승인
 
+    // fk -> 1:N = user:cafe -> if role=2(사장)
+    @OneToOne(optional = false)
+    @JsonBackReference
+    private User user;
+
+    // fk -> 1:N = cafe:menu
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "cafemenu")
+    @JsonManagedReference
+    private Collection<Menu> menus=new ArrayList<>();
+
+    // fk -> 1:N = cafe:order
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "cafeorder")
+    @JsonManagedReference
+    private Collection<Order> orders=new ArrayList<>();
 
     public Cafe(Long ccid){
         this.ccid=ccid;

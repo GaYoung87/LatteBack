@@ -13,7 +13,7 @@ public class MenuResponseDto {
 
     public MenuResponseDto(Menu entity) {
         this.mmid=entity.getMmid();
-        this.ccid=entity.getCafe().getCcid();
+        this.ccid=entity.getCafemenu().getCcid();
         this.mname=entity.getMname();
         this.mprice=entity.getMprice();
         this.mpic=entity.getMpic();

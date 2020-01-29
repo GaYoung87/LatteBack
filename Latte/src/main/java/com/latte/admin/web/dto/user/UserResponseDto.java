@@ -14,7 +14,6 @@ public class UserResponseDto {
     private String uphone;
     private String uemail;
     private String unickname;
-    private String upicture;
     private Role role;
 
     public UserResponseDto(User entity) {
@@ -25,7 +24,6 @@ public class UserResponseDto {
         this.uphone = entity.getUphone();
         this.uemail = entity.getUemail();
         this.unickname = entity.getUnickname();
-        this.upicture = entity.getUpicture();
         this.role = entity.getRole();
     }
 }

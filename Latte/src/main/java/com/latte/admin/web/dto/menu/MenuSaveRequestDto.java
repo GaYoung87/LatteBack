@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class MenuSaveRequestDto {
+
     private String mname;
     private String mprice;
     private String mpic;
@@ -20,12 +21,12 @@ public class MenuSaveRequestDto {
         this.mpic = mpic;
     }
 
-        public Menu toEntity(Long ccid) {
-            return Menu.builder()
-                    .cafe(new Cafe(ccid))
-                    .mname(mname)
-                    .mprice(mprice)
-                    .mpic(mpic)
-                    .build();
-        }
+    public Menu toEntity(Long ccid) {
+        return Menu.builder()
+                .cafemenu(new Cafe(ccid))
+                .mname(mname)
+                .mprice(mprice)
+                .mpic(mpic)
+                .build();
+    }
 }

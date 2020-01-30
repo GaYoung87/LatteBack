@@ -3,7 +3,7 @@ package com.latte.admin.domain.user;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.latte.admin.domain.cafe.Cafe;
 import com.latte.admin.domain.menu.Menu;
-import com.latte.admin.domain.order.Order;
+import com.latte.admin.domain.ordersimple.OrderSimple;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,17 +43,27 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
-    // fk -> 1:N = user:order -> if role=1(손님)
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "userorder")
-    @JsonManagedReference
-    private Collection<Order> orders=new ArrayList<>();
-
-
     // 사진 처음에 입력하지 말고, 로그인 이후에 mypage에서 넣을 수 있도록 하기!!
     /* 프사!!!!!!!!!!!!!!!! */
 
+    // fk -> 1:1 = user:cafe
+    @OneToOne()
+    private Cafe cafe;
+
+    // fk -> 1:N = user:order -> if role=1(손님)
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "userorder")
+    @JsonManagedReference
+    private Collection<OrderSimple> orderSimples =new ArrayList<>();
+
+
+
+
+    public User(Long uuid) {
+        this.uuid=uuid;
+    }
+
     @Builder
-    public User(String uid, String upass, String uname, String uphone, String uemail, String unickname, Role role) {
+    public User(String uid, String upass, String uname, String uphone, String uemail, String unickname, Role role, Cafe cafe) {
         this.uid = uid;
         this.upass = upass;
         this.uname = uname;
@@ -61,6 +71,7 @@ public class User {
         this.uemail = uemail;
         this.unickname = unickname;
         this.role = role;
+        this.cafe = cafe;
     }
 
     // 수정

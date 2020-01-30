@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class MenuService {
     private final MenuRepository menuRepository;
 
-    //선택
+    // 카페 기준 모든 메뉴 선택
     @Transactional
     public List<MenuResponseDto> selectAll(Long ccid){
         return menuRepository.findAllByCcid(ccid).stream()
@@ -28,19 +28,20 @@ public class MenuService {
                 .collect(Collectors.toList());
     }
 
+    // 하나 메뉴 선택
     @Transactional
     public MenuResponseDto selectOne(Long mmid){
         return new MenuResponseDto(menuRepository.findByMmid(mmid));
     }
 
 
-    // 저장
+    // 카페기준 저장
     @Transactional
     public Long save(MenuSaveRequestDto menuSaveRequestDto,Long ccid) {
         return menuRepository.save(menuSaveRequestDto.toEntity(ccid)).getMmid();
     }
 
-    // 업데이트
+    // 메뉴 업데이트
     @Transactional
     public Long update(Long mmid, MenuUpdateRequestDto menuUpdateRequestDto) {
         Menu menu = menuRepository.findById(mmid).orElseThrow(()
@@ -52,6 +53,7 @@ public class MenuService {
         return mmid;
     }
 
+    // 메뉴 삭제
     @Transactional
     public void delete(Long mmid){
          Menu menu = menuRepository.findById(mmid).orElseThrow(()

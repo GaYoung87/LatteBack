@@ -17,6 +17,7 @@ public class CafeListResponseDto {
     private String cdesc;
     private String cstatus;
     private LocalDateTime createdDate;
+    private Long uuid;
 
     public CafeListResponseDto(Cafe entity) {
         this.ccid=entity.getCcid();
@@ -29,5 +30,6 @@ public class CafeListResponseDto {
         this.cdesc=entity.getCdesc();
         this.cstatus=entity.getCstatus();
         this.createdDate=entity.getCreatedDate();
+        this.uuid=entity.getUser().getUuid();
     }
 }

@@ -5,6 +5,8 @@
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Latte.main" target="1.8" />
+      <module name="Latte.test" target="1.8" />
       <module name="Latte.test.main" target="1.8" />
       <module name="Latte.test.test" target="1.8" />
     </bytecodeTargetLevel>

@@ -76,7 +76,7 @@ public class UserService {
         return uid;
     }
 
-    // 탈퇴
+    // 탈퇴(삭제)
     @Transactional
     public void delete(String uid){
         User user = userRepository.findByGid(uid)

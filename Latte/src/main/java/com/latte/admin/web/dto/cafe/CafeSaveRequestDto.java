@@ -1,6 +1,7 @@
 package com.latte.admin.web.dto.cafe;
 
 import com.latte.admin.domain.cafe.Cafe;
+import com.latte.admin.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +30,7 @@ public class CafeSaveRequestDto {
         this.cstatus = cstatus;
     }
 
-    public Cafe toEntity() {
+    public Cafe toEntity(Long uuid) {
         return Cafe.builder()
                 .cname(cname)
                 .cloc(cloc)
@@ -39,6 +40,7 @@ public class CafeSaveRequestDto {
                 .cclose(cclose)
                 .cdesc(cdesc)
                 .cstatus(cstatus)
+                .user(new User(uuid))
                 .build();
     }
 }

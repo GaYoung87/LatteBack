@@ -17,18 +17,14 @@ import java.util.stream.Collectors;
 public class CafeService {
     private final CafeRepository cafeRepository;
 
-    // 기본 저장
+    // 저장 = 추가
     @Transactional
-    public Long save(CafeSaveRequestDto cafeSaveRequestDto){
-        return cafeRepository.save(cafeSaveRequestDto.toEntity()).getCcid();
+    public Long save(Long uuid, CafeSaveRequestDto cafeSaveRequestDto){
+        return cafeRepository.save(cafeSaveRequestDto.toEntity(uuid)).getCcid();
     }
 
-    // 카페 승인상
-    // 태 변경
-//    @Transactional
-//    public void updateStatus(Long ccid, ) {
-//
-//    }
+    // 카페 승인상태 변경
+
 
     // 카페 리스트 (대기 중인 카페를 맨 위에, 승인된 카페, 거부된 카페 순) -> 거절 이유?!
     @Transactional
@@ -38,6 +34,7 @@ public class CafeService {
                 .collect(Collectors.toList());
     }
 
+    // ccid로 카페 하나 찾기
     @Transactional
     public Cafe findByCcId(Long ccid){
         return cafeRepository.findByCcid(ccid);

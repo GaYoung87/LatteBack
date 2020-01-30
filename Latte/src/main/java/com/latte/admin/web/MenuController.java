@@ -19,17 +19,6 @@ public class MenuController {
 
     private final MenuService menuService;
 
-    @ApiOperation("카페에서 메뉴 추가시 저장하는 기능")
-    @PostMapping("/latte/menu/{ccid}")
-    public Map save(@RequestBody MenuSaveRequestDto menuSaveRequestDto, @PathVariable Long ccid) {
-        Map<String,String> map=new HashMap<>();
-
-        if(menuService.save(menuSaveRequestDto,ccid)>0) map.put("Result","Success");
-        else map.put("Result","Fail");
-
-        return map;
-    }
-
     @ApiOperation("한 카페가 보유하고있는 모든 메뉴 출력")
     @GetMapping("/latte/menu/all/{ccid}")
     public List<MenuResponseDto> selectAll(@PathVariable Long ccid){
@@ -40,6 +29,17 @@ public class MenuController {
     @GetMapping("/latte/menu/one/{mmid}")
     public MenuResponseDto selectOne(@PathVariable Long mmid){
         return menuService.selectOne(mmid);
+    }
+
+    @ApiOperation("카페에서 메뉴 추가시 저장하는 기능")
+    @PostMapping("/latte/menu/{ccid}")
+    public Map save(@RequestBody MenuSaveRequestDto menuSaveRequestDto, @PathVariable Long ccid) {
+        Map<String,String> map=new HashMap<>();
+
+        if(menuService.save(menuSaveRequestDto,ccid)>0) map.put("Result","Success");
+        else map.put("Result","Fail");
+
+        return map;
     }
 
     @ApiOperation("선택된 메뉴를 업데이트 하는 기능")

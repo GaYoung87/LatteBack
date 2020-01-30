@@ -7,12 +7,9 @@ import lombok.Getter;
 public class OrderDetailResponseDto {
     private Long odid;
     private Long ooid;
-    private Long mmid;
 
     public OrderDetailResponseDto(OrderDetail entity) {
         this.odid = entity.getOdid();
-        this.ooid = entity.getOrder().getOoid();
-        this.mmid = entity.getMenu().getMmid();
-
+        this.ooid = entity.getOrderSimple().getOoid();
     }
 }

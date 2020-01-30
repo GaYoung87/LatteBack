@@ -1,9 +1,8 @@
 package com.latte.admin.domain.orderdetail;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.latte.admin.domain.cafe.Cafe;
 import com.latte.admin.domain.menu.Menu;
-import com.latte.admin.domain.order.Order;
+import com.latte.admin.domain.ordersimple.OrderSimple;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,19 +18,21 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long odid;
 
-    // fk -> 1:N = order:orderDetail
-    // 주문 정보 받아옴
-    @ManyToOne(optional = false)
-    @JsonBackReference
-    private Order order;
-
     // fk -> 1:1 = orderDetail:menu
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Menu menu;
 
+    // fk -> 1:N = order:orderDetail
+    @ManyToOne(optional = false)
+    @JsonBackReference
+    private OrderSimple orderSimple;
+
+    public OrderDetail(Long odid){
+        this.odid=odid;
+    }
+
     @Builder
-    public OrderDetail(Order order, Menu menu) {
-        this.order=order;
-        this.menu=menu;
+    public OrderDetail(OrderSimple orderSimple) {
+        this.orderSimple = orderSimple;
     }
 }

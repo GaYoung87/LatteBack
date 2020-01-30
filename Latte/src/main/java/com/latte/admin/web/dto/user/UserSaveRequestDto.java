@@ -1,5 +1,6 @@
 package com.latte.admin.web.dto.user;
 
+import com.latte.admin.domain.cafe.Cafe;
 import com.latte.admin.domain.user.Role;
 import com.latte.admin.domain.user.User;
 import lombok.Builder;

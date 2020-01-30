@@ -1,10 +1,9 @@
 package com.latte.admin.domain.cafe;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.latte.admin.domain.BaseTimeEntity;
 import com.latte.admin.domain.menu.Menu;
-import com.latte.admin.domain.order.Order;
+import com.latte.admin.domain.ordersimple.OrderSimple;
 import com.latte.admin.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -47,11 +46,6 @@ public class Cafe extends BaseTimeEntity {
     @Column(nullable = false)
     private String cstatus;  // -1:승인X, 0:대기, 1:승인
 
-    // fk -> 1:N = user:cafe -> if role=2(사장)
-    @OneToOne(optional = false)
-    @JsonBackReference
-    private User user;
-
     // fk -> 1:N = cafe:menu
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "cafemenu")
     @JsonManagedReference
@@ -60,14 +54,19 @@ public class Cafe extends BaseTimeEntity {
     // fk -> 1:N = cafe:order
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "cafeorder")
     @JsonManagedReference
-    private Collection<Order> orders=new ArrayList<>();
+    private Collection<OrderSimple> orderSimples =new ArrayList<>();
+
+    // fk -> 1:1 = cafe:user -> if role=2(사장)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cafe")
+    private User user;
+
 
     public Cafe(Long ccid){
         this.ccid=ccid;
     }
 
     @Builder
-    public Cafe(String cname, String cloc, String cphone, String cpic, String copen, String cdesc, String cclose, String cstatus) {
+    public Cafe(User user,String cname, String cloc, String cphone, String cpic, String copen, String cdesc, String cclose, String cstatus) {
         this.cname = cname;
         this.cloc = cloc;
         this.cphone = cphone;
@@ -76,6 +75,7 @@ public class Cafe extends BaseTimeEntity {
         this.cclose = cclose;
         this.cdesc=cdesc;
         this.cstatus = cstatus;
+        this.user = user;
     }
 
     public void CafeUpdate(String cphone,String cpic,String copen,String cclose,String cdesc,String cstatus) {

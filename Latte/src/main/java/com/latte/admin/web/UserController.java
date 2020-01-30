@@ -43,6 +43,8 @@ public class UserController {
         return map;
     }
 
+    // 비밀번호 확인 -> login로직에서 있으면 안하고, 없으면 한다!!!!!!!!!!
+
     // 회원 정보 수정 -> mypage에서 pass, nickname, phone 변경 가능
     @PutMapping("/latte/user/update/{uid}")
     public Map update(@PathVariable String uid, @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
@@ -52,7 +54,7 @@ public class UserController {
         return map;
     }
 
-    // 삭제
+    // 탈퇴(삭제)
     @DeleteMapping("/latte/user/delete/{uid}")
     public void delete(@PathVariable String uid) {
         // 세션 해제 추가~!~!~

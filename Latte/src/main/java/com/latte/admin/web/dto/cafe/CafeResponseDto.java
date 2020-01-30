@@ -3,6 +3,7 @@ package com.latte.admin.web.dto.cafe;
 import com.latte.admin.domain.cafe.Cafe;
 
 public class CafeResponseDto {
+
     private Long ccid;
     private String cname;
     private String cloc;
@@ -12,6 +13,7 @@ public class CafeResponseDto {
     private String cclose;
     private String cdesc;
     private String cstatus;
+    private Long uuid;
 
     public CafeResponseDto(Cafe entity) {
         this.ccid = entity.getCcid();
@@ -23,5 +25,7 @@ public class CafeResponseDto {
         this.cclose = entity.getCclose();
         this.cdesc = entity.getCdesc();
         this.cstatus = entity.getCstatus();
+        this.uuid = entity.getUser().getUuid();
+
     }
 }

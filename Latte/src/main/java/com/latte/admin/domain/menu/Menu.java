@@ -19,15 +19,6 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long mmid;
 
-    // fk -> 1:N = cafe:menu
-    @ManyToOne(optional = false)
-    @JsonBackReference
-    private Cafe cafemenu;
-
-    // fk -> 1:1 = orderDetail:menu
-    @OneToOne(mappedBy = "menu")
-    private OrderDetail orderDetail;
-
     @Column(nullable = false)
     private String mname;
 
@@ -37,10 +28,18 @@ public class Menu {
     @Column(nullable = false)
     private String mpic;
 
+    // fk -> 1:N = cafe:menu
+    @ManyToOne(optional = false)
+    @JsonBackReference
+    private Cafe cafemenu;
+
+    // fk -> 1:1 = orderDetail:menu
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "menu")
+    private OrderDetail orderDetail;
+
     @Builder
-    public Menu(Cafe cafemenu,OrderDetail orderDetail,String mname,String mprice,String mpic) {
+    public Menu(Cafe cafemenu,String mname,String mprice,String mpic) {
         this.cafemenu=cafemenu;
-        this.orderDetail=orderDetail;
         this.mname=mname;
         this.mprice=mprice;
         this.mpic=mpic;

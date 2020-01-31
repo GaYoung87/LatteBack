@@ -10,6 +10,6 @@ public class OrderDetailResponseDto {
 
     public OrderDetailResponseDto(OrderDetail entity) {
         this.odid = entity.getOdid();
-        this.ooid = entity.getOrderSimple().getOoid();
+        this.ooid = entity.getOrder().getOoid();
     }
 }

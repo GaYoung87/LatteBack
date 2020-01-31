@@ -1,6 +1,6 @@
 package com.latte.admin.web.dto.ordersimple;
 
-import com.latte.admin.domain.ordersimple.OrderSimple;
+import com.latte.admin.domain.order.Order;
 import lombok.Getter;
 
 @Getter
@@ -9,7 +9,7 @@ public class OrderSimpleResponseDto {
     private Long ccid;
     private Long uuid;
 
-    public OrderSimpleResponseDto(OrderSimple entity) {
+    public OrderSimpleResponseDto(Order entity) {
         this.ooid = entity.getOoid();
         this.ccid = entity.getCafeorder().getCcid();
         this.uuid = entity.getUserorder().getUuid();

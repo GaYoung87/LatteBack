@@ -1,4 +1,4 @@
-package com.latte.admin.web.dto.ordersimple;
+package com.latte.admin.web.dto.order;
 
 import com.latte.admin.domain.cafe.Cafe;
 import com.latte.admin.domain.order.Order;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class OrderSimpleRequestDto {
+public class OrderRequestDto {
 
     public Order toEntity(Long ccid, Long uuid) {
         return Order.builder()

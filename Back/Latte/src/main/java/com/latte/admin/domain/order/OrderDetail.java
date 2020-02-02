@@ -2,7 +2,6 @@ package com.latte.admin.domain.order;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.latte.admin.domain.menu.Menu;
-import com.latte.admin.domain.order.Ordered;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

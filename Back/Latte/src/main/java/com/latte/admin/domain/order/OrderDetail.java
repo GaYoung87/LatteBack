@@ -19,20 +19,20 @@ public class OrderDetail {
     private Long odid;
 
     // fk -> 1:1 = orderDetail:menu
+    //orderdetail-menu 의 관계는 orderdetail이 연관관계의 주인
     @OneToOne
-    private Menu menu;
+    @JsonBackReference
+    private Menu ordermenu;
 
     // fk -> 1:N = order:orderDetail
+    //order-orderdetail의 연관관계는 orderdetail이 연관관계의 주인임
     @ManyToOne(optional = false)
     @JsonBackReference
     private Ordered ordered;
 
-    public OrderDetail(Long odid){
-        this.odid=odid;
-    }
-
     @Builder
-    public OrderDetail(Ordered ordered) {
+    public OrderDetail(Menu ordermenu,Ordered ordered) {
+        this.ordermenu=ordermenu;
         this.ordered = ordered;
     }
 }

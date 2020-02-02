@@ -28,6 +28,14 @@ public class MenuService {
                 .collect(Collectors.toList());
     }
 
+
+    //Entity형태로 하나 가져올때(Order에서 사용)
+    @Transactional
+    public Menu findById(Long mmid){
+        return menuRepository.findById(mmid).get();
+    }
+
+
     // 하나 메뉴 선택
     @Transactional
     public MenuResponseDto selectOne(Long mmid){

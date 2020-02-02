@@ -2,7 +2,6 @@ package com.latte.admin.domain.order;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.latte.admin.domain.cafe.Cafe;
 import com.latte.admin.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,29 +20,22 @@ public class Ordered {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ooid;
 
-    // fk -> 1:N = cafe:order
-    @ManyToOne(optional = false)
-    @JsonBackReference
-    private Cafe cafeorder;
-
-    // fk -> 1:N = order:orderDetail
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "orderSimple")
+    // fk -> 1:N = order:orderDetail (받는 쪽 표시)
+    //ordered-orderdetail 관계에서 ordered가 연관관계의 대상이므로 mappedby로 표시해주자.
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "ordered")
     @JsonManagedReference
-    private Collection<OrderDetail> orderDetails=new ArrayList<>();
+    private List<OrderDetail> orderDetails=new ArrayList<>();
 
     // fk -> 1:N = user:order -> if role=1(손님)
-    @ManyToOne(optional = false)
+    //user-ordered의 관계는 ordered가 연관관계의 주인
+    @OneToOne(optional = false)
     @JsonBackReference
-    private User userorder;
+    private User orderuser;
 
-    public Ordered(Long ooid){
-        this.ooid=ooid;
-    }
+    //Pay관련 정보는 추후에 추가 예정
 
     @Builder
-    public Ordered(Cafe cafeorder, User userorder){
-        this.cafeorder=cafeorder;
-        this.userorder=userorder;
+    public Ordered(User orderuser){
+        this.orderuser=orderuser;
     }
-
 }

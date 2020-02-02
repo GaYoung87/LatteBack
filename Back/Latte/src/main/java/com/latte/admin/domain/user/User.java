@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -45,17 +46,11 @@ public class User {
     // 사진 처음에 입력하지 말고, 로그인 이후에 mypage에서 넣을 수 있도록 하기!!
     /* 프사!!!!!!!!!!!!!!!! */
 
-    // fk -> 1:1 = user:cafe
-    @OneToOne()
-    private Cafe cafe;
-
     // fk -> 1:N = user:order -> if role=1(손님)
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "userorder")
+    //user-order의 관계는 user가 연관관계의 대상.
+    @OneToOne(cascade=CascadeType.ALL, mappedBy = "orderuser")
     @JsonManagedReference
-    private Collection<Ordered> ordereds =new ArrayList<>();
-
-
-
+    private Ordered ordered;
 
     public User(Long uuid) {
         this.uuid=uuid;
@@ -70,7 +65,6 @@ public class User {
         this.uemail = uemail;
         this.unickname = unickname;
         this.role = role;
-        this.cafe = cafe;
     }
 
     // 수정

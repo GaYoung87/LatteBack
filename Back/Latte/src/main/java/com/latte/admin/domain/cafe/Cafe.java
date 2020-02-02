@@ -51,16 +51,6 @@ public class Cafe extends BaseTimeEntity {
     @JsonManagedReference
     private Collection<Menu> menus=new ArrayList<>();
 
-    // fk -> 1:N = cafe:order
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "cafeorder")
-    @JsonManagedReference
-    private Collection<Ordered> ordereds =new ArrayList<>();
-
-    // fk -> 1:1 = cafe:user -> if role=2(사장)
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cafe")
-    private User user;
-
-
     public Cafe(Long ccid){
         this.ccid=ccid;
     }
@@ -75,7 +65,6 @@ public class Cafe extends BaseTimeEntity {
         this.cclose = cclose;
         this.cdesc=cdesc;
         this.cstatus = cstatus;
-        this.user = user;
     }
 
     public void CafeUpdate(String cphone,String cpic,String copen,String cclose,String cdesc,String cstatus) {

@@ -1,15 +1,21 @@
 package com.latte.admin.web.dto.order;
 
+import com.latte.admin.domain.menu.Menu;
 import com.latte.admin.domain.order.OrderDetail;
+import com.latte.admin.domain.order.Ordered;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class OrderDetailResponseDto {
-    private Long odid;
-    private Long ooid;
+    private Ordered ordered;
+    private Menu ordermenu;
 
+    @Builder
     public OrderDetailResponseDto(OrderDetail entity) {
-        this.odid = entity.getOdid();
-        this.ooid = entity.getOrdered().getOoid();
+        this.ordered=entity.getOrdered();
+        this.ordermenu=entity.getOrdermenu();
     }
 }

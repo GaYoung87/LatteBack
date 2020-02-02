@@ -33,7 +33,7 @@ public class Menu {
     private Cafe cafemenu;
 
     // fk -> 1:1 = orderDetail:menu
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "menu")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ordermenu")
     private OrderDetail orderDetail;
 
     @Builder

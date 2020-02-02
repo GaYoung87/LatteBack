@@ -30,6 +30,5 @@ public class CafeListResponseDto {
         this.cdesc=entity.getCdesc();
         this.cstatus=entity.getCstatus();
         this.createdDate=entity.getCreatedDate();
-        this.uuid=entity.getUser().getUuid();
     }
 }

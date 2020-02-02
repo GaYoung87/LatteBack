@@ -1,5 +1,6 @@
 package com.latte.admin.web.dto.order;
 
+import com.latte.admin.domain.menu.Menu;
 import com.latte.admin.domain.order.Ordered;
 import com.latte.admin.domain.order.OrderDetail;
 import lombok.Getter;
@@ -9,9 +10,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderDetailRequestDto {
 
-    public OrderDetail toEntity(Long ooid) {
+    private Long mmid;
+
+    public OrderDetailRequestDto(Long mmid){
+        this.mmid=mmid;
+    }
+
+    public OrderDetail toEntity(Menu ordermenu, Ordered ordered) {
         return OrderDetail.builder()
-                .orderSimple(new Ordered(ooid))
+                .ordered(ordered)
+                .ordermenu(ordermenu)
                 .build();
     }
 }

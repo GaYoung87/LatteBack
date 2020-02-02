@@ -13,7 +13,6 @@ public class CafeResponseDto {
     private String cclose;
     private String cdesc;
     private String cstatus;
-    private Long uuid;
 
     public CafeResponseDto(Cafe entity) {
         this.ccid = entity.getCcid();
@@ -25,7 +24,5 @@ public class CafeResponseDto {
         this.cclose = entity.getCclose();
         this.cdesc = entity.getCdesc();
         this.cstatus = entity.getCstatus();
-        this.uuid = entity.getUser().getUuid();
-
     }
 }

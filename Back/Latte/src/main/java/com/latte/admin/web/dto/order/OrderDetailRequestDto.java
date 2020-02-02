@@ -1,7 +1,7 @@
-package com.latte.admin.web.dto.orderdetail;
+package com.latte.admin.web.dto.order;
 
-import com.latte.admin.domain.order.Order;
-import com.latte.admin.domain.orderdetail.OrderDetail;
+import com.latte.admin.domain.order.Ordered;
+import com.latte.admin.domain.order.OrderDetail;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +11,7 @@ public class OrderDetailRequestDto {
 
     public OrderDetail toEntity(Long ooid) {
         return OrderDetail.builder()
-                .orderSimple(new Order(ooid))
+                .orderSimple(new Ordered(ooid))
                 .build();
     }
 }

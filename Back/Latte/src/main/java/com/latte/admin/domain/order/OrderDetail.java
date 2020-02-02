@@ -1,8 +1,8 @@
-package com.latte.admin.domain.orderdetail;
+package com.latte.admin.domain.order;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.latte.admin.domain.menu.Menu;
-import com.latte.admin.domain.order.Order;
+import com.latte.admin.domain.order.Ordered;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,14 +25,14 @@ public class OrderDetail {
     // fk -> 1:N = order:orderDetail
     @ManyToOne(optional = false)
     @JsonBackReference
-    private Order order;
+    private Ordered ordered;
 
     public OrderDetail(Long odid){
         this.odid=odid;
     }
 
     @Builder
-    public OrderDetail(Order order) {
-        this.order = order;
+    public OrderDetail(Ordered ordered) {
+        this.ordered = ordered;
     }
 }

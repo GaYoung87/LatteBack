@@ -1,7 +1,7 @@
 package com.latte.admin.web;
 
 import com.latte.admin.service.OrderDetailService;
-import com.latte.admin.web.dto.orderdetail.OrderDetailResponseDto;
+import com.latte.admin.web.dto.order.OrderDetailResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

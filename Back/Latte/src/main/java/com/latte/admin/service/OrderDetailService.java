@@ -1,7 +1,7 @@
 package com.latte.admin.service;
 
-import com.latte.admin.domain.orderdetail.OrderDetailRepository;
-import com.latte.admin.web.dto.orderdetail.OrderDetailResponseDto;
+import com.latte.admin.domain.order.OrderDetailRepository;
+import com.latte.admin.web.dto.order.OrderDetailResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

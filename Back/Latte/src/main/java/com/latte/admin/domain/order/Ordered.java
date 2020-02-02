@@ -3,7 +3,6 @@ package com.latte.admin.domain.order;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.latte.admin.domain.cafe.Cafe;
-import com.latte.admin.domain.orderdetail.OrderDetail;
 import com.latte.admin.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +15,7 @@ import java.util.Collection;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Order {
+public class Ordered {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,12 +36,12 @@ public class Order {
     @JsonBackReference
     private User userorder;
 
-    public Order(Long ooid){
+    public Ordered(Long ooid){
         this.ooid=ooid;
     }
 
     @Builder
-    public Order(Cafe cafeorder, User userorder){
+    public Ordered(Cafe cafeorder, User userorder){
         this.cafeorder=cafeorder;
         this.userorder=userorder;
     }

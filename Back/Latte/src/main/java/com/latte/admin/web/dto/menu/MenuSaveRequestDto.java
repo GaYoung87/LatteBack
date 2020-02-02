@@ -2,8 +2,6 @@ package com.latte.admin.web.dto.menu;
 
 import com.latte.admin.domain.cafe.Cafe;
 import com.latte.admin.domain.menu.Menu;
-import com.latte.admin.domain.orderdetail.OrderDetail;
-import com.latte.admin.service.CafeService;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

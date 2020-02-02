@@ -1,6 +1,6 @@
-package com.latte.admin.web.dto.orderdetail;
+package com.latte.admin.web.dto.order;
 
-import com.latte.admin.domain.orderdetail.OrderDetail;
+import com.latte.admin.domain.order.OrderDetail;
 import lombok.Getter;
 
 @Getter
@@ -10,6 +10,6 @@ public class OrderDetailResponseDto {
 
     public OrderDetailResponseDto(OrderDetail entity) {
         this.odid = entity.getOdid();
-        this.ooid = entity.getOrder().getOoid();
+        this.ooid = entity.getOrdered().getOoid();
     }
 }

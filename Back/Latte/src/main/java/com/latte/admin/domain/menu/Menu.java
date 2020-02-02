@@ -2,8 +2,7 @@ package com.latte.admin.domain.menu;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.latte.admin.domain.cafe.Cafe;
-import com.latte.admin.domain.cafe.CafeRepository;
-import com.latte.admin.domain.orderdetail.OrderDetail;
+import com.latte.admin.domain.order.OrderDetail;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -2,7 +2,7 @@ package com.latte.admin.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.latte.admin.domain.cafe.Cafe;
-import com.latte.admin.domain.order.Order;
+import com.latte.admin.domain.order.Ordered;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,7 +52,7 @@ public class User {
     // fk -> 1:N = user:order -> if role=1(손님)
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "userorder")
     @JsonManagedReference
-    private Collection<Order> orders =new ArrayList<>();
+    private Collection<Ordered> ordereds =new ArrayList<>();
 
 
 

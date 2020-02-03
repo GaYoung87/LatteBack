@@ -1,4 +1,4 @@
-package com.latte.admin.web.dto.manageCafe;
+package com.latte.admin.web.dto.cafe;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
-public class ManageCafeRequest {
+public class ManageCafeRequestDto {
     private Long ccid;
     private int cstatus;
 
     @Builder
-    public ManageCafeRequest(Long ccid, int cstatus){
+    public ManageCafeRequestDto(Long ccid, int cstatus){
         this.ccid=ccid;
         this.cstatus=cstatus;
     }

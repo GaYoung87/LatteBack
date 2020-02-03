@@ -28,9 +28,9 @@ public class UserService {
 
         // 회원가입완료하면 이메일로 ghld 보내준다.
         // 2번일 경우 테이블에 승인 상태 추가해야 됨
-//        MailService mailService = new MailService();
-//        mailService.setJavaMailSender(javaMailSender);
-//        mailService.sendSimpleMessage(userSaveRequestDto.getUemail(), "[라떼는 말이야] 회원가입 완료", "ㅎㅇㅎㅇ");
+        MailService mailService = new MailService();
+        mailService.setJavaMailSender(javaMailSender);
+        mailService.sendSimpleMessage(userSaveRequestDto.getUemail(), "[라떼는 말이야] 회원가입 완료", "ㅎㅇㅎㅇ");
 
         userRepository.save(userSaveRequestDto.toEntity()).getUid();
         return true;
@@ -115,8 +115,7 @@ public class UserService {
         User user = userRepository.checkByUid(uid).orElseThrow(()
                 -> new IllegalArgumentException("해당 사용자가 없습니다."));
 
-        user.update(userUpdateRequestDto.getUpass(), userUpdateRequestDto.getUphone(),
-                userUpdateRequestDto.getUnickname(),userUpdateRequestDto.getUpic());
+        user.update(userUpdateRequestDto.getUpass(), userUpdateRequestDto.getUphone(), userUpdateRequestDto.getUnickname());
 
         return uid;
     }

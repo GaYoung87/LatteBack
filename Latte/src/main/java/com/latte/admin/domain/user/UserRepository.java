@@ -23,7 +23,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
 
     @Modifying
-    @Query("UPDATE User u set u.upass=:upass where u.uid=:uid")
+    @Query("UPDATE User u set u.upass = :upass where u.uid = :uid")
     void updatePass(@Param("uid") String uid, @Param("upass") String upass);
 
 }

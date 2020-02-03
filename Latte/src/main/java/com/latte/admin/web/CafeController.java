@@ -5,7 +5,7 @@ import com.latte.admin.service.CafeService;
 import com.latte.admin.web.dto.cafe.CafeListResponseDto;
 import com.latte.admin.web.dto.cafe.CafeSaveRequestDto;
 import com.latte.admin.web.dto.cafe.CafeUpdateRequestDto;
-import com.latte.admin.web.dto.manageCafe.ManageCafeRequest;
+import com.latte.admin.web.dto.cafe.ManageCafeRequestDto;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +29,16 @@ public class CafeController {
         return map;
     }
 
+    // 카페 대기/승인/거절 상태 변경
+    @ApiOperation("[관리자 카페승인 관리페이지]: 카페 대기/승인/거절 상태 변경")
+    @PostMapping("/manage/setStatus")
+    public int cafeStatusSet(@RequestBody ManageCafeRequestDto manageCafeRequestDto) {
+        Long ccid= manageCafeRequestDto.getCcid();
+        int cstatus= manageCafeRequestDto.getCstatus();
+        cafeService.setStatus(ccid,cstatus);
+        return cafeService.findByCcId(ccid).getCstatus();
+    }
+
     // 카페 승인 상태에 따른 리스트 보여주기
     @ApiOperation("[관리자 카페승인관리페이지]:대기,승인,거절을 하나의 페이지에 구분해서 보여줌")
     @PostMapping("/managecafe/{cstatus}")
@@ -36,33 +46,15 @@ public class CafeController {
         return cafeService.cafeStatus(cstatus);
     }
 
-    // 카페 대기/승인/거절 상태 변경
-    ///////////////////// 바뀐 값이 나오지만, 그게 db에 cstatus에 변경되지 않음/////////////////////////
-    @ApiOperation("[관리자 카페승인 관리페이지]: 카페 대기/승인/거절 상태 변경")
-    @PostMapping("/manage/setStatus")
-    public int cafeStatusSet(@RequestBody ManageCafeRequest manageCafeRequest) {
-        Long ccid=manageCafeRequest.getCcid();
-        int cstatus=manageCafeRequest.getCstatus();
-        cafeService.setStatus(ccid,cstatus);
-        return cafeService.findByCcId(ccid).getCstatus();
-    }
 
     // 카페 실제로 열었는지에 대한 상태 변경
-    @ApiOperation("[사장님 카페 관리페이지]: 카페 운영중/운영마감 변경")
-    @PostMapping("/opeartion/{ccid}")
-    public int cafeOpeartion(@PathVariable Long ccid, @RequestBody ManageCafeRequest manageCafeRequest) {
-        Cafe cafe=cafeService.findByCcId(manageCafeRequest.getCcid());
-        cafe.statusSet(manageCafeRequest.getCstatus());
-        return cafe.getCstatus();
-    }
-
-
-
-
-
-
-
-
+//    @ApiOperation("[사장님 카페 관리페이지]: 카페 운영중/운영마감 변경")
+//    @PostMapping("/opeartion/{ccid}")
+//    public int cafeOpeartion(@PathVariable Long ccid, @RequestBody ManageCafeRequestDto manageCafeRequestDto) {
+//        Cafe cafe=cafeService.findByCcId(manageCafeRequestDto.getCcid());
+//        cafe.statusSet(manageCafeRequestDto.getCstatus());
+//        return cafe.getCstatus();
+//    }
 
 
     // 카페 리스트 보여주기
@@ -83,7 +75,8 @@ public class CafeController {
     }
 
     // ccid로 카페 하나 찾기
-    /////////////////////menu에 따라서 odid도 보여줘서 메뉴 중복됨/////////////////////////
+    /////////////////////menu에 따라서 odid도 보여주는데,
+    /////////////////////ooid가 마지막값을 가지고옴/////////////////////////
     @ApiOperation("[손님 카페Detail페이지]:ccid를 기준으로 하나의 카페 정보 찾기")
     @GetMapping("/{ccid}")
     public Cafe selectOne(@PathVariable Long ccid){

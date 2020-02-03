@@ -1,9 +1,9 @@
 package com.latte.admin.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.latte.admin.domain.BaseTimeEntity;
 import com.latte.admin.domain.cafe.Cafe;
-import com.latte.admin.domain.menu.Menu;
-import com.latte.admin.domain.ordersimple.OrderSimple;
+import com.latte.admin.domain.order.Ordered;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class User {
+public class User extends BaseTimeEntity {
 
     @Id // pk
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 오토 인크리먼트
@@ -43,27 +44,21 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
-    // 사진 처음에 입력하지 말고, 로그인 이후에 mypage에서 넣을 수 있도록 하기!!
-    /* 프사!!!!!!!!!!!!!!!! */
-
-    // fk -> 1:1 = user:cafe
-    @OneToOne()
-    private Cafe cafe;
+    @Column
+    private String upic;
 
     // fk -> 1:N = user:order -> if role=1(손님)
-    @OneToMany(cascade=CascadeType.ALL, mappedBy = "userorder")
+    //user-order의 관계는 user가 연관관계의 대상.
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "orderuser")
     @JsonManagedReference
-    private Collection<OrderSimple> orderSimples =new ArrayList<>();
-
-
-
+    private List<Ordered> ordered;
 
     public User(Long uuid) {
         this.uuid=uuid;
     }
 
     @Builder
-    public User(String uid, String upass, String uname, String uphone, String uemail, String unickname, Role role, Cafe cafe) {
+    public User(String uid, String upass, String uname, String uphone, String uemail, String unickname, Role role, String upic) {
         this.uid = uid;
         this.upass = upass;
         this.uname = uname;
@@ -71,14 +66,15 @@ public class User {
         this.uemail = uemail;
         this.unickname = unickname;
         this.role = role;
-        this.cafe = cafe;
+        this.upic=upic;
     }
 
     // 수정
-    public void update(String upass, String uphone, String unickname) {
+    public void update(String upass, String uphone, String unickname,String upic) {
         this.upass = upass;
         this.uphone = uphone;
         this.unickname = unickname;
+        this.upic=upic;
     }
 
 }

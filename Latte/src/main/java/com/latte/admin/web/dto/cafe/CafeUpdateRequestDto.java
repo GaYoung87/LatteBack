@@ -12,15 +12,18 @@ public class CafeUpdateRequestDto {
     private String copen;
     private String cclose;
     private String cdesc;
-    private String cstatus;  // -1:승인X, 0:대기, 1:승인
+    private int coperation;
 
     @Builder
-    public CafeUpdateRequestDto(String cphone,String cpic,String copen,String cclose,String cdesc,String cstatus) {
+    public CafeUpdateRequestDto(String cphone,String cpic,String copen,String cclose,String cdesc,int coperation) {
         this.cphone = cphone;
         this.cpic = cpic;
         this.copen = copen;
         this.cclose=cclose;
         this.cdesc=cdesc;
-        this.cstatus = cstatus;
+        this.coperation=coperation;
     }
+
+
+
 }

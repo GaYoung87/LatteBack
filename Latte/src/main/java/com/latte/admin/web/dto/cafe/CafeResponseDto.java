@@ -12,8 +12,8 @@ public class CafeResponseDto {
     private String copen;
     private String cclose;
     private String cdesc;
-    private String cstatus;
-    private Long uuid;
+    private int cstatus;
+    private int coperation;
 
     public CafeResponseDto(Cafe entity) {
         this.ccid = entity.getCcid();
@@ -25,7 +25,6 @@ public class CafeResponseDto {
         this.cclose = entity.getCclose();
         this.cdesc = entity.getCdesc();
         this.cstatus = entity.getCstatus();
-        this.uuid = entity.getUser().getUuid();
-
+        this.coperation=entity.getCoperation();
     }
 }

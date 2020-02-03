@@ -1,9 +1,9 @@
 package com.latte.admin.domain.menu;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.latte.admin.domain.BaseTimeEntity;
 import com.latte.admin.domain.cafe.Cafe;
-import com.latte.admin.domain.cafe.CafeRepository;
-import com.latte.admin.domain.orderdetail.OrderDetail;
+import com.latte.admin.domain.order.OrderDetail;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Menu {
+public class Menu extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class Menu {
     private Cafe cafemenu;
 
     // fk -> 1:1 = orderDetail:menu
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "menu")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ordermenu")
     private OrderDetail orderDetail;
 
     @Builder

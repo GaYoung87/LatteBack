@@ -28,6 +28,9 @@ public interface CafeRepository extends JpaRepository<Cafe,Long> {
 
     // coperation변경
     @Modifying
-    @Query("update Cafe c set c.coperation=:coperation where c.ccid=:ccid")
-    void setOperation(@Param("ccid") Long ccid,@Param("coperation") int coperation);
+    @Query("update Cafe c set c.coperation=:coperation")
+    void setOperation(@Param("coperation") int coperation);
+
+    @Query("select c.ccid from Cafe c where c.uid=:uid")
+    Long findCcidByUid(@Param("uid") String uid);
 }

@@ -21,21 +21,18 @@ import java.util.Map;
 public class MenuController {
 
     private final MenuService menuService;
-    private final JwtService jwtService;
 
-    // jwt 필요
+    // jwt 필요?
     // 메뉴 저장
     @ApiOperation("[사장님 페이지]:카페에서 메뉴 추가시 저장하는 기능")
     @PostMapping("/{ccid}")
-    public Map save(HttpServletRequest httpServletRequest, @RequestBody MenuSaveRequestDto menuSaveRequestDto) {
-        String jwt = httpServletRequest.getCookies()[0].getValue();
+    public Map save(@PathVariable Long ccid, @RequestBody MenuSaveRequestDto menuSaveRequestDto) {
+        /* String jwt = httpServletRequest.getCookies()[0].getValue();
         //유효성 검사
-        if (!jwtService.isUsable(jwt))
-            return null;
-        Map<String, Object> map = jwtService.get(jwt);
-        UserJwtResponsetDto user = (UserJwtResponsetDto) map.get("UserJwtResponseDto");
-
-        menuService.save(menuSaveRequestDto, )
+        if (!jwtService.isUsable(jwt)) throw new UnauthorizedException(); // 예외
+        UserJwtResponsetDto user=jwtService.getUser(jwt);
+        */
+        Map<String,Long> map=new HashMap<>();
         map.put("Result",menuService.save(menuSaveRequestDto,ccid));
 
         return map;
@@ -66,6 +63,7 @@ public class MenuController {
         return map;
     }
 
+    // jwt 필요?
     // menu delete
     @ApiOperation("[사장님페이지]:선택된 메뉴를 삭제하는 기능")
     @DeleteMapping("/delete/{mmid}")

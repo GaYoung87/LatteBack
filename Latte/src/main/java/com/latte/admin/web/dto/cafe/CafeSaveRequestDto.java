@@ -16,8 +16,6 @@ public class CafeSaveRequestDto {
     private String copen;
     private String cclose;
     private String cdesc;
-//    private int cstatus;
-//    private int coperation;
 
     @Builder
     public CafeSaveRequestDto(String cname, String cloc, String cphone, String cpic,String copen,
@@ -29,8 +27,6 @@ public class CafeSaveRequestDto {
         this.copen = copen;
         this.cclose=cclose;
         this.cdesc=cdesc;
-//        this.cstatus = cstatus;
-//        this.coperation=coperation;
     }
 
     public Cafe toEntity(String uid) {

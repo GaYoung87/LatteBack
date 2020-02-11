@@ -2,8 +2,6 @@ package com.latte.admin.web;
 
 import com.latte.admin.domain.menu.Menu;
 import com.latte.admin.service.MenuService;
-import com.latte.admin.web.dto.cafe.CafeListResponseDto;
-import com.latte.admin.web.dto.cafe.CafeManageRequestDto;
 import com.latte.admin.web.dto.menu.*;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -67,6 +65,13 @@ public class MenuController {
         return menuService.selectAll(ccid);
     }
 
+    // mtype 변화에 따라서 주문페이지에서 메뉴 다르게 보여주기!
+    @ApiOperation("mtype 변화에 따라서 주문페이지에서 type별로 다르게 보여주기!")
+    @GetMapping("/{ccid}/{mtype}")
+    public List<MenuResponseDto> findByMtype(@PathVariable Long ccid,@PathVariable int mtype){
+        return menuService.findByMtype(ccid,mtype);
+    }
+
     // 메뉴 선택시 해당 메뉴 관련 정보 제공(해당 카페, 가격, 이름 사진 등)
     @ApiOperation("[언제사용..?]: 메뉴 선택시 해당 메뉴 관련 정보 제공(해당 카페, 가격, 이름 사진 등)")
     @GetMapping("/one/{mmid}")
@@ -94,7 +99,6 @@ public class MenuController {
         return map;
     }
 
-    // jwt 필요?
     // menu delete
     @ApiOperation("[사장님페이지]:선택된 메뉴를 삭제하는 기능")
     @DeleteMapping("/delete/{mmid}")
@@ -102,22 +106,12 @@ public class MenuController {
         menuService.delete(mmid);
     }
 
-    // 메인메뉴여부 변경
-    @ApiOperation("[사장님 메뉴 관리페이지]: 메인 메뉴 여부 변경")
-    @PostMapping("/main/setMain")
-    public int setMain(@RequestBody MenuMainRequestDto menuMainRequestDto) {
-        Long mmid = menuMainRequestDto.getMmid();
-        int mmain = menuMainRequestDto.getMmain();
-        menuService.setMain(mmid, mmain);
-        return menuService.findById(mmid).getMmain();
-    }
 
-    // 메인메뉴 리스트 보여주기
-    @ApiOperation("[카페 디테일 페이지]:메인 메뉴 리스트 보여주기")
-    @PostMapping("/main/{mmain}")
-    public List<MenuListResponseDto> showStatus(@PathVariable int mmain) {
-        return menuService.mainStatus(mmain);
+    // mainmenu설정
+    @ApiOperation("메인메뉴 설정/취소(버튼으로 토글)")
+    @PutMapping("/toggleMain/{mmid}")
+    public void toggleMain(@PathVariable Long mmid){
+        menuService.toggleMain(mmid);
     }
-
 
 }

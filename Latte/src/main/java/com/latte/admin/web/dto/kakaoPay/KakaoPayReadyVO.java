@@ -1,10 +1,13 @@
 package com.latte.admin.web.dto.kakaoPay;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
+
 public class KakaoPayReadyVO {
     private String tid;
     private String next_redirect_app_url;

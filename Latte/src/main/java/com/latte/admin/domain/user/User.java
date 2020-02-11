@@ -26,7 +26,7 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private String uid;
 
-    @Column(nullable = false)
+    @Column
     private String upass;
 
     @Column(nullable = false)
@@ -53,8 +53,6 @@ public class User extends BaseTimeEntity {
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "orderuser")
     @JsonManagedReference
     private List<Ordered> ordered;
-
-
 
     public User(Long uuid) {
         this.uuid=uuid;

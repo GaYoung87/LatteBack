@@ -16,14 +16,14 @@ public class MenuSaveRequestDto {
     private String mname;
     private List<MenuSizeRequestDto> menuSizeRequestDtos;
     private String mpic;
-    private int mmain;
+    private int mtype;
 
     @Builder
-    public MenuSaveRequestDto(String mname,List<MenuSizeRequestDto> menuSizeRequestDtos,String mpic,int mmain) {
+    public MenuSaveRequestDto(String mname,List<MenuSizeRequestDto> menuSizeRequestDtos,String mpic,int mtype) {
         this.mname = mname;
         this.menuSizeRequestDtos = menuSizeRequestDtos;
         this.mpic = mpic;
-        this.mmain=mmain;
+        this.mtype=mtype;
     }
 
     public Menu toEntity(Cafe cafe) {
@@ -31,7 +31,8 @@ public class MenuSaveRequestDto {
                 .cafemenu(cafe) //조인용
                 .mname(mname)
                 .mpic(mpic)
-                .mmain(mmain)
+                .isMain(0)
+                .mtype(0)
                 .build();
     }
 

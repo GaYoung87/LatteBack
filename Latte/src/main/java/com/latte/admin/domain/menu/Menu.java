@@ -8,7 +8,6 @@ import com.latte.admin.domain.order.OrderDetail;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.List;
@@ -32,9 +31,11 @@ public class Menu extends BaseTimeEntity {
     @Column(nullable = false)
     private String mpic;
 
+    @Column
+    private int isMain;
+
     @Column(nullable = false)
-    @ColumnDefault("0")
-    private int mmain; // 0:false, 1:true
+    private int mtype;
 
     // fk -> 1:N = cafe:menu
     @ManyToOne(optional = false)
@@ -51,15 +52,21 @@ public class Menu extends BaseTimeEntity {
 
 
     @Builder
-    public Menu(Cafe cafemenu,String mname,String mpic, int mmain) {
+    public Menu(Cafe cafemenu,String mname,String mpic, int isMain,int mtype) {
         this.cafemenu=cafemenu;
         this.mname=mname;
         this.mpic=mpic;
-        this.mmain=mmain;
+        this.isMain=isMain;
+        this.mtype=mtype;
     }
+
 
     public void update(String mname,String mpic) {
         this.mname=mname;
         this.mpic=mpic;
+    }
+
+    public void toggleMainMenu(){
+        this.isMain=1-this.isMain;
     }
 }

@@ -8,7 +8,6 @@ import com.latte.admin.domain.menu.MenuSize;
 import com.latte.admin.domain.menu.MenuSizeRepository;
 import com.latte.admin.domain.options.Option;
 import com.latte.admin.domain.options.OptionRepository;
-import com.latte.admin.web.dto.cafe.CafeListResponseDto;
 import com.latte.admin.web.dto.menu.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -50,6 +49,14 @@ public class MenuService {
     @Transactional
     public List<MenuResponseDto> selectAll(Long ccid){
         return menuRepository.findAllByCcid(ccid).stream()
+                .map(MenuResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    // mtype 변화에 따라서 주문페이지에서 메뉴 다르게 보여주기!
+    @Transactional
+    public List<MenuResponseDto> findByMtype(Long ccid, int mtype) {
+        return menuRepository.findByMtype(ccid,mtype).stream()
                 .map(MenuResponseDto::new)
                 .collect(Collectors.toList());
     }
@@ -118,20 +125,13 @@ public class MenuService {
         optionRepository.delete(option);
     }
 
-    // 메인메뉴여부 변경
+    // Toogle Main Menu
     @Transactional
-    public void setMain(Long mmid,int mmain)
-    {
-        menuRepository.setMain(mmid,mmain);
+    public void toggleMain(Long mmid){
+        Menu menu=menuRepository.findByMmid(mmid);
+        int toggleValue=0;
+        if(menu.getIsMain()==0) toggleValue=1;
+        menuRepository.toggleMain(mmid,toggleValue);
     }
-
-    // 메인메뉴 보여주는 리스트
-    @Transactional
-    public List<MenuListResponseDto> mainStatus(int mmain) {
-        return menuRepository.mainStatus(mmain).stream()
-                .map(MenuListResponseDto::new)
-                .collect(Collectors.toList());
-    }
-
 
 }

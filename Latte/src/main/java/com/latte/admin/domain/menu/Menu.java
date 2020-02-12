@@ -34,7 +34,7 @@ public class Menu extends BaseTimeEntity {
     @Column
     private int isMain;
 
-    @Column(nullable = false)
+    @Column
     private int mtype;
 
     // fk -> 1:N = cafe:menu

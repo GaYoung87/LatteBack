@@ -1,0 +1,65 @@
+package com.latte.admin.domain.menu;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.latte.admin.domain.BaseTimeEntity;
+import com.latte.admin.domain.cafe.Cafe;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Getter
+@NoArgsConstructor
+@Entity
+public class Menu extends BaseTimeEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long mmid;
+
+    @Column(nullable = false)
+    private String mname;
+
+    @Column(nullable = false)
+    private String mpic;
+
+    @Column
+    private int isMain;
+
+    @Column
+    private int mtype;
+
+    @Column
+    private Long mprice;
+
+    // fk -> 1:N = cafe:menu
+    @ManyToOne(optional = false)
+    @JsonBackReference
+    private Cafe cafemenu;
+
+
+    @Builder
+    public Menu(Cafe cafemenu,String mname,String mpic,int isMain,int mtype,Long mprice) {
+        this.cafemenu=cafemenu;
+        this.mname=mname;
+        this.mpic=mpic;
+        this.isMain=isMain;
+        this.mtype=mtype;
+        this.mprice=mprice;
+    }
+
+
+    public void update(String mname,String mpic,int isMain,int mtype,Long mprice) {
+        this.mname=mname;
+        this.mpic=mpic;
+        this.isMain=isMain;
+        this.mtype=mtype;
+        this.mprice=mprice;
+    }
+
+    public void toggleMainMenu(){
+        this.isMain=1-this.isMain;
+    }
+}

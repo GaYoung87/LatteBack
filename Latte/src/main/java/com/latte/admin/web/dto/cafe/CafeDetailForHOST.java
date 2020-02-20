@@ -13,8 +13,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class CafeDetailForHOST {
-
-    private Long ccid;
     private String uid;
     private String cname;
     private String cloc;
@@ -31,7 +29,6 @@ public class CafeDetailForHOST {
 
     @Builder
     public CafeDetailForHOST(Cafe entity) {
-        this.ccid=entity.getCcid();
         this.uid = entity.getUid();
         this.cname = entity.getCname();
         this.cloc = entity.getCloc();
